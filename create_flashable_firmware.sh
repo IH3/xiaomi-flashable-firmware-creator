@@ -29,7 +29,7 @@ function creatupscrpt() {
 
 mkdir temp/
 mkdir temp/unzipped
-unzip $1 -d temp/unzipped/
+unzip $1 -d temp/unzipped/ | pv -l >/dev/null
 
 if [ ! -f temp/unzipped/META-INF/com/google/android/update-binary ] || [ ! -f temp/unzipped/META-INF/com/google/android/updater-script ] || [ ! -d temp/unzipped/firmware-update ]; then
     echo "** This zip doesn't contain firmware directory."
