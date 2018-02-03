@@ -27,7 +27,7 @@ function creatupscrpt() {
     echo "set_progress(1.000000);" >> $2
 }
 
-function checkscrpt() {
+function checkupscrpt() {
     file=META-INF/com/google/android/updater-script
     path=/firmware/image
     node=/dev/block/bootdevice/by-name
@@ -57,7 +57,7 @@ mv temp/unzipped/META-INF/com/google/android/update-binary temp/META-INF/com/goo
 creatupscrpt temp/unzipped/META-INF/com/google/android/updater-script temp/META-INF/com/google/android/updater-script
 
 cd temp/
-checkscrpt
+checkupscrpt
 zip -r ../fw_$1 META-INF/ firmware-update/
 cd ../
 

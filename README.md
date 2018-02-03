@@ -6,3 +6,9 @@ You can easily create flashable firmware zip from Recovery MIUI.
 chmod +x create_flashable_firmware.sh
 ./create_flashable_firmware.sh ROM_FILE
 ```
+
+## Installation
+
+```
+sudo apt-get install pv
+```
