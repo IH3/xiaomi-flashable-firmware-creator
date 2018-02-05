@@ -30,7 +30,7 @@ EOF
 }
 
 function checkupscrpt() {
-    file=META-INF/com/google/android/updater-script
+    file=temp/META-INF/com/google/android/updater-script
     path=/firmware/image
     node=/dev/block/bootdevice/by-name
     if grep -wq "$path/sec.dat" $file
@@ -44,7 +44,7 @@ function checkupscrpt() {
 
 mkdir temp/
 mkdir temp/unzipped
-unzip $1 -d temp/unzipped/ | pv -l >/dev/null
+unzip -q $1 -d temp/unzipped/
 
 if [ ! -f temp/unzipped/META-INF/com/google/android/update-binary ] || [ ! -f temp/unzipped/META-INF/com/google/android/updater-script ] || [ ! -d temp/unzipped/firmware-update ]; then
     echo "** This zip doesn't contain firmware directory."
@@ -57,10 +57,10 @@ mv temp/unzipped/firmware-update temp/
 mkdir -p temp/META-INF/com/google/android
 mv temp/unzipped/META-INF/com/google/android/update-binary temp/META-INF/com/google/android/
 creatupscrpt temp/unzipped/META-INF/com/google/android/updater-script temp/META-INF/com/google/android/updater-script
+checkupscrpt
 
 cd temp/
-checkupscrpt
-zip -r ../fw_$1 META-INF/ firmware-update/
+zip -q -r9 ../fw_$1 META-INF/ firmware-update/
 cd ../
 
 rm -rf temp/
